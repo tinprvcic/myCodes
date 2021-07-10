@@ -23,7 +23,7 @@ const BarcodeListItem = ({
   return (
     <Pressable
       style={styles.paddedContainer}
-      android_ripple={{color: '#ccc', borderless: false}}
+      android_ripple={{color: '#eff2f5', borderless: false}}
       onPress={() => onItemPress(barcode, title)}>
       <Icon
         name={format === 'QR' ? 'qrcode' : 'barcode'}
@@ -37,7 +37,6 @@ const BarcodeListItem = ({
         <Text style={styles.text}>{title}</Text>
         <Text style={styles.shadowText}>{barcode}</Text>
       </View>
-      {/* {btn} */}
       <OptionsMenu onDelete={() => deleteItem(id)} onMove={onMove} />
     </Pressable>
   );
@@ -57,8 +56,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     flex: 1,
-    borderColor: '#ccc',
-    borderBottomWidth: StyleSheet.hairlineWidth * 2,
+    borderColor: '#eff2f5',
+    borderBottomWidth: StyleSheet.hairlineWidth * 3,
   },
 
   icon: {
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   shadowText: {
-    color: '#888',
+    color: '#58667e',
   },
 });
 

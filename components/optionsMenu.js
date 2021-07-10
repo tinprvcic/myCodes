@@ -12,7 +12,7 @@ const OptionsMenu = ({onDelete, onMove}) => {
 
   const btn = (
     <Pressable
-      android_ripple={{color: '#ccc', borderless: true, radius: 32}}
+      android_ripple={{color: '#eff2f5', borderless: true, radius: 32}}
       onPressIn={openMenu}>
       <Icon
         size={24}
@@ -21,8 +21,8 @@ const OptionsMenu = ({onDelete, onMove}) => {
         style={{
           paddingRight: 18,
           paddingLeft: 18,
-          borderColor: '#ccc',
-          borderBottomWidth: StyleSheet.hairlineWidth * 2,
+          borderColor: '#eff2f5',
+          borderBottomWidth: StyleSheet.hairlineWidth * 3,
           paddingBottom: 24,
           paddingTop: 22.5,
         }}
