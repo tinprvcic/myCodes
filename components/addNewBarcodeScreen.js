@@ -3,11 +3,19 @@ import {View, StyleSheet} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DropDown from 'react-native-paper-dropdown';
+import {useFocusEffect} from '@react-navigation/native';
 
-const AddNewBarcodeScreen = ({navigation}) => {
+const AddNewBarcodeScreen = ({navigation, route}) => {
   const [name, setName] = useState();
   const [barcode, setBarcode] = useState();
   const [format, setFormat] = useState();
+
+  const scannerTranslationTable = {
+    CODE_128: 'CODE128',
+    EAN_13: 'EAN13',
+    CODE_39: 'CODE39',
+    QR_CODE: 'QR',
+  };
 
   const barcodeFormats = [
     {label: 'CODE128', value: 'CODE128'},
@@ -47,6 +55,13 @@ const AddNewBarcodeScreen = ({navigation}) => {
       console.error(error);
     }
   };
+
+  useFocusEffect(() => {
+    if (route?.params?.barcode) {
+      setBarcode(route.params.barcode);
+      setFormat(scannerTranslationTable[route.params.type]);
+    }
+  });
 
   return (
     <View style={styles.mainContainer}>
@@ -91,10 +106,9 @@ const AddNewBarcodeScreen = ({navigation}) => {
           CANCEL
         </Button>
         <Button
-          disabled
           mode="outlined"
           icon="barcode-scan"
-          onPress={() => saveBarcode()}
+          onPress={() => navigation.navigate('Scan')}
           style={{marginTop: 12, marginRight: 12}}>
           SCAN
         </Button>

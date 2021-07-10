@@ -6,6 +6,7 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import DisplayBarcodeScreen from './components/displayBarcodeScreen';
 import {Provider as PaperProvider} from 'react-native-paper';
+import ScanBarcodeScreen from './components/scanBarcodeScreen';
 
 const theme = {
   ...DefaultTheme,
@@ -42,6 +43,7 @@ const App = () => {
                 title: route.params.title,
               })}
             />
+            <Stack.Screen name="Scan" component={ScanBarcodeScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
