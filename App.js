@@ -35,7 +35,14 @@ const App = () => {
               component={MainScreen}
               options={{title: 'barcodes'}}
             />
-            <Stack.Screen name="Add New" component={AddNewBarcodeScreen} />
+            <Stack.Screen
+              name="Add New"
+              component={AddNewBarcodeScreen}
+              options={({route}) => ({
+                title: route.params?.name,
+              })}
+            />
+
             <Stack.Screen
               name="Barcode"
               component={DisplayBarcodeScreen}

@@ -83,7 +83,17 @@ const DisplayBarcodeScreen = props => {
             justifyContent: 'flex-end',
             padding: 16,
           }}>
-          <Button mode="outlined" disabled style={{marginRight: 12}}>
+          <Button
+            mode="outlined"
+            onPress={() =>
+              props.navigation.navigate('Add New', {
+                id: props.route.params.id,
+                name: props.route.params.title,
+                barcode: props.route.params.barcode,
+                type: props.route.params.format,
+              })
+            }
+            style={{marginRight: 12}}>
             EDIT
           </Button>
           <Button mode="outlined" onPress={() => alertDeletion()}>

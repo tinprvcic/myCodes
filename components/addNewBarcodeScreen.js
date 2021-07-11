@@ -3,7 +3,6 @@ import {View, StyleSheet} from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DropDown from 'react-native-paper-dropdown';
-import {useFocusEffect} from '@react-navigation/native';
 
 const AddNewBarcodeScreen = ({navigation, route}) => {
   const [name, setName] = useState();
@@ -30,10 +29,12 @@ const AddNewBarcodeScreen = ({navigation, route}) => {
   const saveBarcode = async () => {
     try {
       const items = JSON.parse(await AsyncStorage.getItem('@list'));
+      const filteredItems = items.filter(item => item.id != route?.params.id);
+
       const itemList =
-        items != null
+        filteredItems != null
           ? [
-              ...items,
+              ...filteredItems,
               {
                 title: name,
                 barcode,
@@ -56,12 +57,15 @@ const AddNewBarcodeScreen = ({navigation, route}) => {
     }
   };
 
-  useFocusEffect(() => {
-    if (route?.params?.barcode) {
-      setBarcode(route.params.barcode);
-      setFormat(scannerTranslationTable[route.params.type]);
-    }
-  });
+  const updateInputs = () => {
+    const {barcode, type, name} = route?.params || {};
+
+    if (barcode) setBarcode(barcode);
+    if (type) setFormat(scannerTranslationTable[type] || type);
+    if (name) setName(name);
+  };
+
+  React.useEffect(updateInputs, [route?.params]);
 
   return (
     <View style={styles.mainContainer}>
